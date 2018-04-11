@@ -4,7 +4,7 @@ const UglifyjsWebpackPlugin = require("uglifyjs-webpack-plugin");
 const webpack = require('webpack');
 
 module.exports = {
-    entry: { index: './src/index.js', main: './src/admin.js' },
+    entry: { index: './src/index.js' },
     output: {
         path: path.join(__dirname, 'dist'),
         filename: '[name].[hash].js'
