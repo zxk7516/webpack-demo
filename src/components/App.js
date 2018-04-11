@@ -1,46 +1,28 @@
-import React, { Component } from 'react';
-import CardList from './CardList';
-import Scroll from './Scroll';
-//import {robots} from '../models/robot';
-import SearchBox from './SearchBox';
-class App extends Component {
-    constructor(){
-        super();
-        this.state = {robots:[],searchfield:'l'};
-    }
+import React from 'react';
+import  Dropdown from 'antd/lib/Dropdown';
+import  Menu  from 'antd/lib/Menu';
+import  Icon from 'antd/lib/Icon';
+import './App.css';
 
-    componentDidMount(){
-        fetch('https://jsonplaceholder.typicode.com/users')
-        .then( res => {return res.json();})
-        .then( users => {
-            console.log(users);
-            this.setState ( {robots:users});
-        });
-    }
-
+export default class App extends React.Component {
     render() {
-        const onSearchChange =  (e) =>{
-            const filterRobots = robots.filter((robot)=>{
-                return robot.name.toLowerCase().includes(e.target.value.toLowerCase());
-            });
-            console.log({searchfield:e.target.value,robots: filterRobots});
-            this.setState({searchfield:e.target.value,robots: filterRobots});
-        }
-        if(this.state.robots.length){
-            return (
-                <div className="pa3 tc">
-                    <h1>RobotFriends</h1>
-                    <SearchBox searchChange={onSearchChange} searchfield={this.state.searchfield} />
-                    <Scroll>
-                        <CardList robots={this.state.robots} />
-                    </Scroll>
-                </div>
-            );
-        }else{
-            return  <h1>loading... </h1>
-        }
-
-
+        const menu = <Menu>
+            <Menu.Item>
+                <a target="_blank" rel="noopener noreferrer" href="#">1st menu item</a>
+            </Menu.Item>
+            <Menu.Item>
+                <a target="_blank" rel="noopener noreferrer" href="#">2nd menu item</a>
+            </Menu.Item>
+            <Menu.Item>
+                <a target="_blank" rel="noopener noreferrer" href="#">3d menu item</a>
+            </Menu.Item>
+        </Menu>
+        
+        return <Dropdown overlay={menu}>
+            <a className="ant-dropdown-link" href="#">
+              Hover me <Icon type="down" />
+            </a>
+        </Dropdown>;
+        
     }
 }
-export default App;
